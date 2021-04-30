@@ -1,0 +1,22 @@
+{
+  "name": "school-management-system-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shadman77/School-Management-System-Server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shadman77/School-Management-System-Server/issues"
+  },
+  "homepage": "https://github.com/Shadman77/School-Management-System-Server#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
