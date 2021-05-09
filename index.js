@@ -1,18 +1,26 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 
-// Using middleware for json support
+// Middlewares
 app.use(express.json());
 
-// Serving static file
-app.use(express.static("public"));
+// Connect to database
+ATLAS_URI = "mongodb+srv://user:2cw87BkCbPifyQBn@cluster0.xnydm.mongodb.net/School_Management?retryWrites=true&w=majority";
+mongoose
+  .connect(ATLAS_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log("Database Connected"))
+  .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
   return res.json({
     msg: "Hello World",
   });
 });
-
 app.get("/:msg", (req, res) => {
   console.log(req.params.msg);
   return res.json({
@@ -21,18 +29,16 @@ app.get("/:msg", (req, res) => {
 });
 
 app.post("/upload", (req, res) => {
-  // console.log(req.body);
-  // console.log(req.body.id);
+  console.log(req.body);
   return res.json({
-    msg: "Data Recieved",
+    msg: "data received",
   });
 });
-
-// Import a route file
+//Import a route file
 app.use("/auth", require("./routes/api/auth"));
 
 const port = process.env.PORT || 5000;
-
+console.log(port);
 app.listen(port, () => {
   console.log(`Server Started on port ${port}`);
 });

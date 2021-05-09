@@ -10,16 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shadman77/School-Management-System-Server.git"
+    "url": "git+https://github.com/sultan179/School-Management-System-Server.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Shadman77/School-Management-System-Server/issues"
+    "url": "https://github.com/sultan179/School-Management-System-Server/issues"
   },
-  "homepage": "https://github.com/Shadman77/School-Management-System-Server#readme",
+  "homepage": "https://github.com/sultan179/School-Management-System-Server#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
