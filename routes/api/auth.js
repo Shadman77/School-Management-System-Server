@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const bcrypt = require("bcryptjs");
 
 const User = require("../../models/User");
 
@@ -46,16 +47,23 @@ const validate_register = require("../../middleware/validation/auth/register");
 router.post("/register", validate_register, async (req, res) => {
   const { email, password, password_confirm } = req.body;
 
-  const newUser = new User({
-    email,
-    password,
-    password_confirm,
-  });
-
   try {
     const user = await User.findOne({ email });
 
     if (user) throw Error("Email already exists");
+
+    // const salt = await bcrypt.genSalt();
+    const salt = bcrypt.genSaltSync();
+    if (!salt) throw Error("User could not be saved");
+
+    // const hash = await bcrypt.hash(password, salt);
+    const hash = bcrypt.hashSync(password, salt);
+    if (!hash) throw Error("User could not be saved");
+
+    const newUser = new User({
+      email,
+      password: hash,
+    });
 
     const savedUser = await newUser.save();
     if (!savedUser) throw Error("User could not be saved");
@@ -64,6 +72,7 @@ router.post("/register", validate_register, async (req, res) => {
       msg: "User saved",
     });
   } catch (err) {
+    console.log(err);
     return res.json({
       msg: err.message,
     });
