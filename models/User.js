@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  registration_data: { type: Date, default: Date.now },
+  registration_date: { type: Date, default: Date.now },
 });
 
 UserSchema.index({ email: 1 }, { unique: true });

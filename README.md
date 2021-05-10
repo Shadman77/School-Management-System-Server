@@ -4,3 +4,5 @@
 git add .  
 git commit -m "Your message here"  
 git push  
+
+git pull
