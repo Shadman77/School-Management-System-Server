@@ -79,4 +79,25 @@ router.post("/register", validate_register, async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) throw Error("Email does not exist");
+
+    const password_matched = await bcrypt.compare(password, user.password);
+    if (!password_matched) throw Error("Wrong credentials");
+
+    res.json({
+      msg: "Login successfull",
+    });
+  } catch (err) {
+    console.log(err);
+    return res.json({
+      msg: err.message,
+    });
+  }
+});
+
 module.exports = router;
