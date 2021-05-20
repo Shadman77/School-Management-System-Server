@@ -6,7 +6,8 @@ const mongoose = require("mongoose");
 app.use(express.json());
 
 // Connect to database
-ATLAS_URI = "mongodb+srv://user:2cw87BkCbPifyQBn@cluster0.xnydm.mongodb.net/School_Management?retryWrites=true&w=majority";
+ATLAS_URI =
+  "mongodb+srv://user:2cw87BkCbPifyQBn@cluster0.xnydm.mongodb.net/School_Management?retryWrites=true&w=majority";
 mongoose
   .connect(ATLAS_URI, {
     useNewUrlParser: true,
@@ -36,6 +37,7 @@ app.post("/upload", (req, res) => {
 });
 //Import a route file
 app.use("/auth", require("./routes/api/auth"));
+app.use("/results", require("./routes/api/results"));
 
 const port = process.env.PORT || 5000;
 console.log(port);
