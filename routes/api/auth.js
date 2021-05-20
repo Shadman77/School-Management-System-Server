@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 
+const jwt = require("jsonwebtoken");
+
 const User = require("../../models/User");
 
 // Middlewares
@@ -89,8 +91,13 @@ router.post("/login", async (req, res) => {
     const password_matched = await bcrypt.compare(password, user.password);
     if (!password_matched) throw Error("Wrong credentials");
 
-    res.json({
+    // Generate token
+    const token = jwt.sign({ email }, "Password", {
+      expiresIn: 3600,
+    });
+    return res.json({
       msg: "Login successfull",
+      token,
     });
   } catch (err) {
     console.log(err);
