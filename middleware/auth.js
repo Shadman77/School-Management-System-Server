@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const check_if_logged_in = (req, res, next) => {
-  const token = req.header("Authorization");
+  const token = req.header("Authorization").split(" ")[1];
   // console.log(token);
 
   if (!token) {

@@ -46,6 +46,11 @@ const validate_register = require("../../middleware/validation/auth/register");
 //     });
 // });
 
+// role=>teacher or student
+// studentid
+// teacherid
+// student_class: number of the class
+// previous fields as is
 router.post("/register", validate_register, async (req, res) => {
   const { email, password, password_confirm } = req.body;
 
@@ -81,6 +86,8 @@ router.post("/register", validate_register, async (req, res) => {
   }
 });
 
+// check if email is given and valid
+// check if password is given
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
