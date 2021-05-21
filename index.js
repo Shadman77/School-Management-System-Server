@@ -38,6 +38,7 @@ app.post("/upload", (req, res) => {
 //Import a route file
 app.use("/auth", require("./routes/api/auth"));
 app.use("/results", require("./routes/api/results"));
+app.use("/account", require("./routes/api/account"));
 
 const port = process.env.PORT || 5000;
 console.log(port);

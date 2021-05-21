@@ -1,9 +1,8 @@
 const jwt = require("jsonwebtoken");
 
 const check_if_logged_in = (req, res, next) => {
-  console.log("Middleware");
   const token = req.header("Authorization");
-  console.log(token);
+  // console.log(token);
 
   if (!token) {
     return res.json({
@@ -12,7 +11,8 @@ const check_if_logged_in = (req, res, next) => {
   }
 
   try {
-    const decoded_token = jwt.verify(token, "Password");
+    const decoded = jwt.verify(token, "Password");
+    req.user = decoded; //{email: dvfguywerbvfg}
     next();
   } catch {
     return res.json({
