@@ -17,24 +17,6 @@ mongoose
   .then(() => console.log("Database Connected"))
   .catch((err) => console.log(err));
 
-app.get("/", (req, res) => {
-  return res.json({
-    msg: "Hello World",
-  });
-});
-app.get("/:msg", (req, res) => {
-  console.log(req.params.msg);
-  return res.json({
-    msg: req.params.msg,
-  });
-});
-
-app.post("/upload", (req, res) => {
-  console.log(req.body);
-  return res.json({
-    msg: "data received",
-  });
-});
 //Import a route file
 app.use("/auth", require("./routes/api/auth"));
 app.use("/results", require("./routes/api/results"));

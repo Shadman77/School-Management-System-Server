@@ -11,13 +11,25 @@ const check_if_logged_in = (req, res, next) => {
   }
 
   try {
+    // console.log(ewf)
     const decoded = jwt.verify(token, "Password");
     req.user = decoded; //{email: dvfguywerbvfg}
     next();
-  } catch {
-    return res.json({
-      msg: "Invalid Token",
-    });
+  } catch (e) {
+    if (e.name === "JsonWebTokenError")
+      return res.json({
+        msg: "Invalid Token",
+      });
+    else if (e.name === "TokenExpiredError")
+      return res.json({
+        msg: "Please login again",
+      });
+    else {
+      console.log(e);
+      return res.json({
+        msg: "Please contact support",
+      });
+    }
   }
 };
 

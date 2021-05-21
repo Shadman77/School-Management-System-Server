@@ -93,7 +93,7 @@ router.post("/login", async (req, res) => {
 
     // Generate token
     const token = jwt.sign({ email }, "Password", {
-      expiresIn: 3600,
+      expiresIn: 1,
     });
     return res.json({
       msg: "Login successfull",
