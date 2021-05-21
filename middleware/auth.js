@@ -12,7 +12,7 @@ const check_if_logged_in = (req, res, next) => {
 
   try {
     // console.log(ewf)
-    const decoded = jwt.verify(token, "Password");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded; //{email: dvfguywerbvfg}
     next();
   } catch (e) {

@@ -92,8 +92,8 @@ router.post("/login", async (req, res) => {
     if (!password_matched) throw Error("Wrong credentials");
 
     // Generate token
-    const token = jwt.sign({ email }, "Password", {
-      expiresIn: 1,
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+      expiresIn: 3600,
     });
     return res.json({
       msg: "Login successfull",

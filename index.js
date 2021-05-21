@@ -2,14 +2,15 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 
+// Create environment variables
+require("dotenv").config();
+
 // Middlewares
 app.use(express.json());
 
 // Connect to database
-ATLAS_URI =
-  "mongodb+srv://user:2cw87BkCbPifyQBn@cluster0.xnydm.mongodb.net/School_Management?retryWrites=true&w=majority";
 mongoose
-  .connect(ATLAS_URI, {
+  .connect(process.env.ATLAS_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
