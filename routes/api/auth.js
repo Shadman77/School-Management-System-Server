@@ -7,6 +7,7 @@ const User = require("../../models/User");
 
 // Middlewares
 const validate_register = require("../../middleware/validation/auth/register");
+const validate_login=require("../../middleware/validation/auth/login");
 
 // router.post("/register", validate_register, (req, res) => {
 //   // console.log(req.body);
@@ -88,7 +89,8 @@ router.post("/register", validate_register, async (req, res) => {
 
 // check if email is given and valid
 // check if password is given
-router.post("/login", async (req, res) => {
+router.post("/login", validate_login, async (req, res) => {
+
   const { email, password } = req.body;
 
   try {
@@ -113,5 +115,6 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
 
 module.exports = router;
