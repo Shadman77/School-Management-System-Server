@@ -1,0 +1,10 @@
+Account
+    email
+    password
+    first_name
+    last_name
+    type (student/teacher/admin) //admin account will already be created
+    class (only if type is student)
+    phone_no
+    gender
+    active (true/false) //initially false, admin can set to true and again false
