@@ -1,10 +1,12 @@
-Account
-    email
-    password
+1. Registration route add the following, (need to change the User model as well)
+    email (Verified)
+    password (Verified)
     first_name
     last_name
     type (student/teacher/admin) //admin account will already be created
-    class (only if type is student)
-    phone_no
-    gender
+    class (only if type is student) (Play - A levels)
+    phone_no (specific format, country code needed)
+    gender (Male/Female/Others)
     active (true/false) //initially false, admin can set to true and again false
+
+2. Update registration validation for the additional fields as needed
