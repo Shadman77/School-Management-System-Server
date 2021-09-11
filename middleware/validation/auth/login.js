@@ -23,6 +23,7 @@
       });
     }
 
+    next();
 
 };
 module.exports=login_validate;
