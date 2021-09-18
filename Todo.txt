@@ -9,4 +9,4 @@
     gender (Male/Female/Others)
     active (true/false) //initially false, admin can set to true and again false
 
-2. Update registration validation for the additional fields as needed
+2. Update registration validation for the additional fields as needed .
