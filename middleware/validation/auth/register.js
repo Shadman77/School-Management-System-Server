@@ -4,11 +4,40 @@ const validateEmail = (email) => {
 };
 
 const validate = (req, res, next) => {
+
+
   console.log("Middleware");
   const email = req.body.email;
   const password = req.body.password;
   const password_confirm = req.body.password_confirm;
+  const firstname=req.body.firstname;
+  const lastname=req.body.lastname;
+  const type=req.body.type;
+  
+  const phonenum=req.body.phonenum;
+  const gender=req.body.gender;
+  
+  //if student type,choose class level                      
+  if (req.body.type.includes("student")){
+    const classLevel=req.body.classLevel;
+    if (typeof classLevel === "undefined") {
+      return res.status(400).json({
+        msg: "class is required",
+        field: ["class"],
+      });
+    }
+  
 
+  }
+
+
+  //type
+  if (typeof type === "undefined") {
+    return res.status(400).json({
+      msg: "type is required",
+      field: ["type"],
+    });
+  }
   // Email
   if (typeof email === "undefined") {
     return res.status(400).json({
@@ -16,6 +45,44 @@ const validate = (req, res, next) => {
       field: ["email"],
     });
   }
+//phone
+  if (req.body.phonenum.length!=11){
+    return res.status(400).json({
+      msg: "Phone number must be 11 digits",
+    })
+  }
+  if (typeof phonenum === "undefined") {
+    return res.status(400).json({
+      msg: "Phone number is required",
+      field: ["phonenum"],
+    });
+  }
+
+  //gender
+  if (typeof gender === "undefined") {
+    return res.status(400).json({
+      msg: "gender is required",
+      field: ["gender"],
+    });
+  }
+
+
+  if (typeof firstname === "undefined") {
+    return res.status(400).json({
+      msg: "firstname is required",
+      field: ["firstname"],
+    });
+  }
+  if (typeof lastname=== "undefined") {
+    return res.status(400).json({
+      msg: "lastname is required",
+      field: ["lastname"],
+    });
+  }
+
+
+
+
   // if (!req.body.email.includes("@")) {
   if (!validateEmail(email)) {
     return res.status(400).json({
@@ -66,6 +133,9 @@ const validate = (req, res, next) => {
       field: ["password", "password_confirm"],
     });
   }
+
+
+
 
   next();
 };
