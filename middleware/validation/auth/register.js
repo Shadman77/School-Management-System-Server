@@ -1,35 +1,20 @@
 const validateEmail = (email) => {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 };
 
 const validate = (req, res, next) => {
-
-
   console.log("Middleware");
   const email = req.body.email;
   const password = req.body.password;
   const password_confirm = req.body.password_confirm;
-  const firstname=req.body.firstname;
-  const lastname=req.body.lastname;
-  const type=req.body.type;
-  
-  const phonenum=req.body.phonenum;
-  const gender=req.body.gender;
-  
-  //if student type,choose class level                      
-  if (req.body.type.includes("student")){
-    const classLevel=req.body.classLevel;
-    if (typeof classLevel === "undefined") {
-      return res.status(400).json({
-        msg: "class is required",
-        field: ["class"],
-      });
-    }
-  
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+  const type = req.body.type;
 
-  }
-
+  const phonenum = req.body.phonenum;
+  const gender = req.body.gender;
 
   //type
   if (typeof type === "undefined") {
@@ -37,6 +22,17 @@ const validate = (req, res, next) => {
       msg: "type is required",
       field: ["type"],
     });
+  } else {
+    //if student type,choose class level
+    if (req.body.type.includes("student")) {
+      const classLevel = req.body.classLevel;
+      if (typeof classLevel === "undefined") {
+        return res.status(400).json({
+          msg: "class is required",
+          field: ["class"],
+        });
+      }
+    }
   }
   // Email
   if (typeof email === "undefined") {
@@ -45,11 +41,11 @@ const validate = (req, res, next) => {
       field: ["email"],
     });
   }
-//phone
-  if (req.body.phonenum.length!=11){
+  //phone
+  if (req.body.phonenum.length != 11) {
     return res.status(400).json({
       msg: "Phone number must be 11 digits",
-    })
+    });
   }
   if (typeof phonenum === "undefined") {
     return res.status(400).json({
@@ -66,22 +62,18 @@ const validate = (req, res, next) => {
     });
   }
 
-
   if (typeof firstname === "undefined") {
     return res.status(400).json({
       msg: "firstname is required",
       field: ["firstname"],
     });
   }
-  if (typeof lastname=== "undefined") {
+  if (typeof lastname === "undefined") {
     return res.status(400).json({
       msg: "lastname is required",
       field: ["lastname"],
     });
   }
-
-
-
 
   // if (!req.body.email.includes("@")) {
   if (!validateEmail(email)) {
@@ -133,9 +125,6 @@ const validate = (req, res, next) => {
       field: ["password", "password_confirm"],
     });
   }
-
-
-
 
   next();
 };
