@@ -53,7 +53,19 @@ const validate_login = require("../../middleware/validation/auth/login");
 // student_class: number of the class
 // previous fields as is
 router.post("/register", validate_register, async (req, res) => {
-  const { email, password, password_confirm } = req.body;
+  const {
+    email,
+    password,
+    password_confirm,
+    firstname,
+    lastname,
+    classLevel,
+    type,
+    phonenum,
+    gender,
+  } = req.body;
+
+  console.log(classLevel);
 
   try {
     const user = await User.findOne({ email });
@@ -68,11 +80,19 @@ router.post("/register", validate_register, async (req, res) => {
     const hash = bcrypt.hashSync(password, salt);
     if (!hash) throw Error("User could not be saved");
 
+    // console.log("While Creating");
     const newUser = new User({
       email,
       password: hash,
+      firstname,
+      lastname,
+      classLevel,
+      type,
+      phonenum,
+      gender,
     });
 
+    // console.log("While saving");
     const savedUser = await newUser.save();
     if (!savedUser) throw Error("User could not be saved");
 

@@ -5,14 +5,14 @@ const validateEmail = (email) => {
 };
 
 const validate = (req, res, next) => {
-  console.log("Middleware");
+  // console.log("Middleware");
   const email = req.body.email;
   const password = req.body.password;
   const password_confirm = req.body.password_confirm;
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
+  
   const type = req.body.type;
-
   const phonenum = req.body.phonenum;
   const gender = req.body.gender;
 
